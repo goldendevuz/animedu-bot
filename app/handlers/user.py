@@ -11,8 +11,8 @@ from aiogram.types import (
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from database import Database
-from keyboards import (
+from app.database import Database
+from app.keyboards import (
     main_menu_keyboard, search_keyboard, back_button,
     premium_keyboard, profile_keyboard, payment_confirmation_keyboard,
     ask_question_keyboard, language_keyboard, genre_select_keyboard,
@@ -233,7 +233,7 @@ def register_user_handlers(router: Router, db: Database, admin_id: int):
         if _is_off(message.from_user.id): return
         if not await _check_sub(message.from_user.id, message.bot): return
         db.log_ab_event(message.from_user.id, 'for_you_opened')
-        from handlers.features import _send_feed_item
+        from app.handlers.features import _send_feed_item
 
         class FakeCall:
             def __init__(self, msg): self.message = msg; self.from_user = msg.from_user; self.bot = msg.bot
@@ -314,7 +314,7 @@ def register_user_handlers(router: Router, db: Database, admin_id: int):
         class FakeCall:
             def __init__(self, msg): self.message = msg; self.from_user = msg.from_user; self.bot = msg.bot
             async def answer(self): pass
-        from handlers.features import show_dna
+        from app.handlers.features import show_dna
         await show_dna(FakeCall(message))
 
     @router.message(F.text.in_({t['watchlist'] for t in TEXTS_LIST}))
@@ -347,7 +347,7 @@ def register_user_handlers(router: Router, db: Database, admin_id: int):
     async def menu_assistant(message: Message, state: FSMContext):
         if _is_off(message.from_user.id): return
         from aiogram.fsm.state import State
-        from handlers.features import AssistantState
+        from app.handlers.features import AssistantState
         await state.set_state(AssistantState.chatting)
         kb = InlineKeyboardBuilder()
         kb.row(InlineKeyboardButton(text="🗑 Suhbatni tozala", callback_data="clear_ai_chat"))

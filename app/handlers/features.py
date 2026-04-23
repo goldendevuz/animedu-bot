@@ -12,7 +12,7 @@ import asyncio
 import json
 import aiohttp
 import os
-from database import Database
+from app.database import Database
 
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
@@ -22,7 +22,7 @@ from aiogram.types import (
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from database import Database
+from app.database import Database
 
 router = Router()
 
@@ -359,7 +359,7 @@ async def clear_ai_chat(call: CallbackQuery):
 @router.callback_query(F.data == "exit_assistant")
 async def exit_assistant(call: CallbackQuery, state: FSMContext):
         await state.clear()
-        from keyboards import main_menu_keyboard
+        from app.keyboards import main_menu_keyboard
         lang = db.get_user(call.from_user.id).get('language','uz')
         await call.message.answer("✅ Assistantdan chiqdingiz.", reply_markup=main_menu_keyboard(lang))
         await call.answer()

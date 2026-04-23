@@ -12,10 +12,10 @@ from aiogram.types import InlineKeyboardButton, TelegramObject
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 # Ma'lumotlar bazasi va handlerlar
-from database import Database
-from handlers.user import router as user_router, register_user_handlers
-from handlers.admin import router as admin_router, register_admin_handlers
-from handlers.features import router as features_router
+from app.database import Database
+from app.handlers.user import router as user_router, register_user_handlers
+from app.handlers.admin import router as admin_router, register_admin_handlers
+from app.handlers.features import router as features_router
 
 # .env faylini yuklash
 load_dotenv()

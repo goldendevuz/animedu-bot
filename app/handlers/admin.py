@@ -8,8 +8,8 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from database import Database
-from keyboards import (
+from app.database import Database
+from app.keyboards import (
     admin_panel_keyboard, anime_settings_keyboard, back_admin_button,
     channel_settings_keyboard, main_settings_keyboard,
     mandatory_channels_keyboard, send_message_keyboard,
